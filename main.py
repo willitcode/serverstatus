@@ -75,10 +75,16 @@ async def on_ready():
 async def help(ctx):
     embed = discord.Embed(title='Help',
             color=discord.Color(0x000000))
-    embed.add_field(name='%ping', value='Check if the bot is online/working. Also outputs the bot\'s latency')
+    embed.add_field(name='%ping', value='Check if the bot is online/working. Also outputs the bot\'s latency.')
+    embed.add_field(name='%checknow', value='Check if the servers are online *now*. (Rather than waiting for the bot to automatically check them, which it does every 60 seconds.)')
+    await ctx.send(embed=embed)
+
+@client.command(pass_context = True)
+async def checknow(ctx):
+    await ping_servers()
 
 @client.command(pass_context = True)
 async def ping(ctx):
-    await ctx.send('Pong!')
+    await ctx.send('Pong! Latency: {0}ms'.format(round(client.latency * 1000, 1)))
 
 client.run(config['config']['token'])

@@ -72,6 +72,12 @@ async def on_ready():
         await asyncio.sleep(60)
 
 @client.command(pass_context = True)
+async def help(ctx):
+    embed = discord.Embed(title='Help',
+            color=discord.Color(0x000000))
+    embed.add_field(name='%ping', value='Check if the bot is online/working. Also outputs the bot\'s latency')
+
+@client.command(pass_context = True)
 async def ping(ctx):
     await ctx.send('Pong!')
 

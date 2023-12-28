@@ -3,30 +3,15 @@ A tiny Python script to ICMP ping servers and send a Discord message if they're 
 
 ## Usage
 ### Outside of Docker
-Head over to the [releases](https://github.com/NaCl10/serverstatus/releases) and download the file main.py from the latest stable release.
+Head over to the [releases](https://github.com/willitcode/serverstatus/releases) and download the file main.py from the latest stable release.
 
 Run main.py (Make sure you're in the same directory with main.py and that it's a directory where you're okay with main.py living semi-permanately):
 ```shell
 python3 main.py
 ```
-It will error out. This is because you need to enter a valid bot token in config.ini. See [configuration](https://github.com/NaCl10/serverstatus#configuration) for more information on that.
+It will error out. This is because you need to enter a valid bot token in config.ini. See [configuration](https://github.com/willitcode/serverstatus#configuration) for more information on that.
 
 After configuration, run main.py again to actually start the bot. It's recommended to use some way of autostarting the script and to run it on a machine that will have high uptime, like a server.
-
-### With Docker
-
-Pull and run the container:
-```shell
-docker run -v /path/to/config.ini:/bot/config.ini --restart always -d --name serverstatus nacl10/serverstatus
-```
-NOTES: You can specify a particular version of the bot by adding `:release-<version number here>` (DO NOT prefix the version number with "v") to the end of `nacl10/serverstatus`. The path to config.ini shouldn't actually have a file called config.ini in it yet, it should just be where you want config.ini to be.  Make sure the path to config.ini ends in config.ini, even though config.ini doesn't exist yet. You can *technically* call the container something other than "serverstatus", but it's not recommended.  
-It will error out. This is because you need to enter a valid bot token in config.ini. See [configuration](https://github.com/NaCl10/serverstatus#configuration) for more information on that.
-
-After configuration, start the container again:
-```shell
-docker start serverstatus
-```
-It's recommended to run the container on a machine that will have high uptime, like a server.
 
 ### Configuration
 
@@ -37,10 +22,10 @@ Then, edit the configuration file with your text editor of choice. Outside of Do
 Values:
 | Value | Description | Required |
 | ----- | ----------- | -------- |
-| token | The bot token. Information about getting a bot token can be found in [the only good part of the discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html#discord-intro). | Yes |
+| token | The bot token. Information about getting a bot token can be found in [the discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html#discord-intro). | Yes |
 | status | Discord will display this as what the bot is "playing". It comes set to "echo 'R'; while true; do echo 'E'; done" by default, you can set it to whatever you want. | No |
-| error_message | What the bot will send in the specified channel(s) if a server goes down. {address} will be replaced with the address of the server that went down. [See this](https://github.com/NaCl10/serverstatus#how-do-i-mention-myself-others-everyone-or-here-in-the-message-the-bot-sends-if-a-server-goes-down-or-comes-back-up) for information about @mentioning people here. | Yes |
-| success_message | What the bot will send in the specified channel(s) after a server comes back up. {address} will be replaced with the address of the server that went down. [See this](https://github.com/NaCl10/serverstatus#how-do-i-mention-myself-others-everyone-or-here-in-the-message-the-bot-sends-if-a-server-goes-down-or-comes-back-up) for information about @mentioning people here. | Yes |
+| error_message | What the bot will send in the specified channel(s) if a server goes down. {address} will be replaced with the address of the server that went down. [See this](https://github.com/willitcode/serverstatus#how-do-i-mention-myself-others-everyone-or-here-in-the-message-the-bot-sends-if-a-server-goes-down-or-comes-back-up) for information about @mentioning people here. | Yes |
+| success_message | What the bot will send in the specified channel(s) after a server comes back up. {address} will be replaced with the address of the server that went down. [See this](https://github.com/willitcode/serverstatus#how-do-i-mention-myself-others-everyone-or-here-in-the-message-the-bot-sends-if-a-server-goes-down-or-comes-back-up) for information about @mentioning people here. | Yes |
 
 Next, you need to specify a/some server(s) to monitor. This is a bit weird, so buckle up. Underneath the `[servers]` section, type something like this:
 ```ini
@@ -64,21 +49,7 @@ How to get a channel's ID:
 
 ## Updating
 ### Outside of Docker
-Delete main.py (DO NOT delete config.ini), download the new main.py from the [releases](https://github.com/NaCl10/serverstatus/releases), put it where the old main.py was, and run it again/restart your service. Simple as that.
-
-### With Docker
-First, pull the new image:
-```shell
-docker pull nacl10/serverstatus
-```
-Then, stop and remove the old container:
-```shell
-docker stop serverstatus && docker rm serverstatus
-```
-Finally, re-create the container with the new image:
-```shell
-docker run -v /path/to/config.ini:/bot/config.ini --restart always -d --name serverstatus nacl10/serverstatus
-```
+Delete main.py (DO NOT delete config.ini), download the new main.py from the [releases](https://github.com/willitcode/serverstatus/releases), put it where the old main.py was, and run it again/restart your service. Simple as that.
 
 ## Contributing
 Just open a pull request! That's what open source is all about. 
